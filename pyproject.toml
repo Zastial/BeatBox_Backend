@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "beatbox-backend"
+version = "0.1.0"
+description = ""
+authors = ["acarol <acarol@qosenergy.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+asyncpg = "^0.29.0"
+pydantic-settings = "^2.5.2"
+fastapi = {extras = ["standard"], version = "^0.114.1"}
+sqlmodel = "^0.0.22"
+alembic = "^1.13.1"
+psycopg2 = "^2.9.9"
+respx = "^0.21.1"
+pytz = "^2024.1"
+python-dateutil = "^2.9.0.post0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
