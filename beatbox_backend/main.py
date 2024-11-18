@@ -16,7 +16,7 @@ app = FastAPI(lifespan=lifespan)
 
 # Add CORS middleware
 origins = [
-    "http://sunlamander.tech",
+    "http://beatbox.sunlamander.tech",
     "http://localhost:3000",
     "http://localhost:3001",
     "http://localhost:3002",
