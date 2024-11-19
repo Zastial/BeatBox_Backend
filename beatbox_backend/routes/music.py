@@ -28,6 +28,14 @@ def get_musics(session: Session = Depends(get_session)) -> List[MusicModel]:
 
 
 @router.get("/{music_id}")
+def get_music(music_id: uuid.UUID, session: Session = Depends(get_session)) -> MusicModel:
+    music = session.get(MusicModel, music_id)
+    if not music:
+        raise HTTPException(status_code=404, detail="Musique non trouvée")
+    return music
+
+
+@router.get("/download/{music_id}")
 def get_music_file(
     music_id: uuid.UUID,
     session: Session = Depends(get_session)
