@@ -4,6 +4,7 @@ from sqlalchemy import select
 from beatbox_backend.models.music import Beat as BeatModel
 from fastapi import APIRouter, Depends, UploadFile, File, HTTPException, Form
 from fastapi.responses import FileResponse
+from beatbox_backend.models.music import Vocal as VocalModel
 from beatbox_backend.database import get_session
 from typing import List
 import shutil
@@ -119,9 +120,15 @@ def delete_beat(beat_id: uuid.UUID, session: Session = Depends(get_session)):
     if not beat:
         raise HTTPException(status_code=404, detail="Beat non trouvé")
     
-    # Delete the music file from the server
-    os.remove(os.path.join(UPLOAD_DIR, beat.filename))
-    os.remove(os.path.join(UPLOAD_DIR, beat.img_path))
+    vocals = session.exec(select(VocalModel).where(VocalModel.beat_id == beat_id)).scalars().all()
+    for vocal in vocals:
+        session.delete(vocal)
+    
+    try:
+        os.remove(os.path.join(UPLOAD_DIR, beat.filename))
+        os.remove(os.path.join(UPLOAD_DIR, beat.img_path))
+    except Exception as e:
+        print(e)
 
     session.delete(beat)
     session.commit()

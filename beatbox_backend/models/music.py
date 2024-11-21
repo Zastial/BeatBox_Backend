@@ -41,7 +41,7 @@ class Music(SQLModel, table=True):
     filename: str
     img_path: str
     artist: str
-    vocal_id: UUID = Field(foreign_key="vocal.id")
-    beat_id: UUID = Field(foreign_key="beat.id")
+    vocal_id: UUID | None = Field(foreign_key="vocal.id")
+    beat_id: UUID | None = Field(foreign_key="beat.id")
     vocal: "Vocal" = Relationship()
     beat: "Beat" = Relationship()

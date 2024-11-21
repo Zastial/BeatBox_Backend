@@ -34,6 +34,14 @@ def get_vocal(vocal_id: uuid.UUID, session: Session = Depends(get_session)) -> V
     return vocal
 
 
+@router.get("/beat/{beat_id}")
+def get_vocals_by_beat_id(beat_id: uuid.UUID, session: Session = Depends(get_session)) -> List[VocalModel]:
+    statement = select(VocalModel).where(VocalModel.beat_id == beat_id)
+    result = session.exec(statement)
+    vocals = result.scalars().all()
+    return list(vocals)
+
+
 @router.get("/download/{vocal_id}")
 def get_vocal_file(
     vocal_id: uuid.UUID,
@@ -102,8 +110,10 @@ def delete_vocal(vocal_id: uuid.UUID, session: Session = Depends(get_session)):
         raise HTTPException(status_code=404, detail="vocal non trouvé")
     
     # Delete the music file from the server
-    os.remove(os.path.join(UPLOAD_DIR, vocal.filename))
-    os.remove(os.path.join(UPLOAD_DIR, vocal.img_path))
+    try:    
+        os.remove(os.path.join(UPLOAD_DIR, vocal.filename))
+    except Exception as e:
+        print(e)
 
     session.delete(vocal)
     session.commit()
