@@ -1,7 +1,7 @@
 import os
 from sqlmodel import Session
 from sqlalchemy import select
-from beatbox_backend.models.music import Vocal as VocalModel
+from beatbox_backend.models.Music import Vocal as VocalModel
 from fastapi import APIRouter, Depends, UploadFile, File, HTTPException, Form
 from fastapi.responses import FileResponse
 from beatbox_backend.database import get_session

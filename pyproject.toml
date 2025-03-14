@@ -16,6 +16,8 @@ psycopg2 = "^2.9.9"
 respx = "^0.21.1"
 pytz = "^2024.1"
 python-dateutil = "^2.9.0.post0"
+passlib = "^1.7.4"
+bcrypt = "^4.3.0"
 
 [build-system]
 requires = ["poetry-core"]

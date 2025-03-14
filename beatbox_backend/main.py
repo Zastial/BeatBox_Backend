@@ -5,6 +5,7 @@ from beatbox_backend.database import init_db
 from beatbox_backend.routes.music import router as music_router
 from beatbox_backend.routes.beat import router as beat_router
 from beatbox_backend.routes.vocal import router as vocal_router
+from beatbox_backend.routes.users import router as users_router
 
 
 app = FastAPI()
@@ -39,6 +40,7 @@ app.add_middleware(
 app.include_router(music_router)
 app.include_router(beat_router)
 app.include_router(vocal_router)
+app.include_router(users_router)
 
 if __name__ == "__main__":
     import uvicorn

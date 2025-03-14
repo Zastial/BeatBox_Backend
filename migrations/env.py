@@ -6,7 +6,9 @@ from sqlalchemy import pool
 from alembic import context
 from sqlmodel import SQLModel
 
-from beatbox_backend.models.music import Music
+from beatbox_backend.models.Music import Music
+from beatbox_backend.models.Users import Users
+
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
